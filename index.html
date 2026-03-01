@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ugly Duckling - Lesion Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Ugly Duckling</h1>
+            <p>Suspicious Lesion Detection & Analysis</p>
+            <div class="upload-btn-wrapper">
+                <button class="btn primary-btn" id="uploadBtn">Upload Image</button>
+                <input type="file" id="imageInput" accept="image/*" />
+            </div>
+        </header>
+
+        <main class="main-content" id="mainContent" style="display: none;">
+            <div class="controls-panel panel">
+                <h2>Segmentation Boundaries</h2>
+                <div class="control-group">
+                    <label for="cropTop">Top Boundary</label>
+                    <input type="range" id="cropTop" min="0" max="100" value="0">
+                </div>
+                <div class="control-group">
+                    <label for="cropBottom">Bottom Boundary</label>
+                    <input type="range" id="cropBottom" min="0" max="100" value="100">
+                </div>
+                <div class="control-group">
+                    <label for="cropLeft">Left Boundary</label>
+                    <input type="range" id="cropLeft" min="0" max="100" value="0">
+                </div>
+                <div class="control-group">
+                    <label for="cropRight">Right Boundary</label>
+                    <input type="range" id="cropRight" min="0" max="100" value="100">
+                </div>
+
+                <button class="btn secondary-btn" id="processBtn">Detect Lesions (Auto Segmentation + Circles)</button>
+            </div>
+
+            <div class="visual-panel">
+                <div class="canvas-container panel">
+                    <h2>Original + Segmentation + Detection</h2>
+                    <canvas id="originalCanvas"></canvas>
+                </div>
+                <div class="canvas-container panel">
+                    <h2>OCTA + Canny Output</h2>
+                    <canvas id="filterCanvas"></canvas>
+                </div>
+            </div>
+
+            <div class="results-panel panel">
+                <h2>Top 5 Lesions (Scored)</h2>
+                <div id="resultsList" class="results-list">
+                    <div class="empty-state">No lesions processed yet.</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MediaPipe Modules -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.js"
+        crossorigin="anonymous"></script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
